@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class testWindow {
 
@@ -193,6 +194,7 @@ public class testWindow {
 		btnNewButton_12.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText()+String.valueOf("\u221A")+"(");
 			}
 		});
 		btnNewButton_12.setBackground(Color.WHITE);
@@ -221,7 +223,9 @@ public class testWindow {
 		btnNewButton_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s = textField.getText();
-				textField.setText(s.substring(0,s.length()-1));
+				if(s.length()>0){
+					textField.setText(s.substring(0,s.length()-1));
+				}
 			}
 		});
 		btnNewButton_15.setBackground(Color.WHITE);
@@ -237,11 +241,21 @@ public class testWindow {
 		panel_2.add(btnNewButton_16);
 		
 		JButton btnNewButton_17 = new JButton("(");
+		btnNewButton_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText()+"(");
+			}
+		});
 		btnNewButton_17.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_17.setBackground(Color.WHITE);
 		panel_2.add(btnNewButton_17);
 		
 		JButton btnNewButton_18 = new JButton(")");
+		btnNewButton_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText()+")");
+			}
+		});
 		btnNewButton_18.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_18.setBackground(Color.WHITE);
 		panel_2.add(btnNewButton_18);
@@ -292,10 +306,18 @@ public class testWindow {
 		panel_3.add(btnNewButton_20);
 		
 		JButton btnNewButton_23 = new JButton("=");
+		btnNewButton_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text = textField.getText();
+				
+			}
+		});
 		btnNewButton_23.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_23.setBackground(Color.WHITE);
 		panel_3.add(btnNewButton_23);
 		frame.setBounds(100, 100, 266, 359);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	
 }
