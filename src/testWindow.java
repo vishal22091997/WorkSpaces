@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -12,6 +13,10 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -21,7 +26,7 @@ public class testWindow {
 	private JTextField textField;
 	private int token = 1;
 	private boolean actSig = true;
-	
+	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
 	/**
 	 * Launch the application.
 	 */
@@ -30,6 +35,17 @@ public class testWindow {
 			public void run() {
 				try {
 					testWindow window = new testWindow();
+					// Making the Key value pair so as to calculate the precidence
+					map.put("+",1);
+					map.put("(", 0);
+					map.put("-", 1);
+					map.put("\u00F7",2);//division
+					map.put("\u00D7", 2);//multiplication
+					
+					
+					
+					
+					///till here
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,6 +74,14 @@ public class testWindow {
 		frame.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		
+		
+		
+		
+		
+		
+		
+		
+		//
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -309,7 +333,134 @@ public class testWindow {
 		btnNewButton_23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = textField.getText();
+				Queue<String> queue = parseText(text);
+				System.out.println(queue);
+				Queue<String> post = convertToPost(queue);
+				System.out.println(post);
+				double solution = calculateSolution(post);
+				textField.setText(String.valueOf(solution));
+			}
+			
+			private double calculateSolution(Queue<String> post) {
+				// TODO Auto-generated method stub
+				Stack<String> temp = new Stack<String>();
+				while(!post.isEmpty()){
+					String c = post.poll();
+					if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
+							c.equals("+") || c.equals("\u00D7")){
+						double a = Double.parseDouble(temp.pop());
+						double b = Double.parseDouble(temp.pop());
+						double sol = 0;
+						System.out.println(c);
+						if(c.equals("+")){
+							// Addition of two happens here
+							sol = a+b;
+						}else if(c.equals("-")){
+							// subtraction of two happens here
+							sol = b-a;
+						}else if(c.equals(	"\u00F7")){
+							//division of the two happens here
+							sol = b/a;
+						}else if(c.equals("/u00D7")){
+							//multiplication of two happens here
+							sol = b*a;	
+						}else {
+							JOptionPane.showMessageDialog(null, "The making of operation is under processing");
+						}
+						temp.push(String.valueOf(sol));
+					}else {
+						temp.push(c);
+						
+					}
+				 }
 				
+				
+				return Double.parseDouble(temp.peek());
+			}
+
+			private Queue<String> parseText(String text){
+				int len = text.length();
+				Queue <String> sol = new LinkedList<String>();
+				String temp = "";
+				for(int i=0;i<len;i++){
+					String c = String.valueOf(text.charAt(i));
+					if(c.equals("(")){
+						sol.add(String.valueOf(c));
+						temp = "";
+					}else if(c.equals(")")){
+						if(temp.length()>0)
+							sol.add(temp);
+						temp = "";
+						sol.add(")");
+					}else if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
+							c.equals("+") || c.equals("\u00D7")){
+						if(temp.length()>0){
+							sol.add(temp);
+						}
+						temp = "";
+						sol.add(c);	
+						
+					}else{
+						temp = temp+c;
+					}
+					
+				}if(temp.length()>0)
+				sol.add(temp);
+				
+				
+				return sol;
+				
+			}
+
+			private boolean checkPrecidence(String temp, String cur){
+				// TODO Auto-generated method stub
+				if(map.get(temp)>=map.get(cur)){
+					return true;
+				}
+				else{
+					return false;
+				}
+				 
+				
+				
+				
+			}
+
+			private Queue<String> convertToPost(Queue<String> queue) {
+				// TODO Auto-generated method stub
+				Queue<String> post = new LinkedList<String>();
+				Stack<String> temp = new Stack<String>();
+				while(!queue.isEmpty()){
+					String cur = queue.poll();
+					if(cur.equals("(")){
+						temp.push(cur);
+					}else if(cur.equals(")")){
+						while(!temp.peek().equals("(")){
+							post.add(temp.pop());
+						}
+						temp.pop();
+					}else if(cur.equals("\u00D7") || cur.equals("\u00F7") || cur.equals("-") || 
+							cur.equals("+") || cur.equals("\u00D7")){
+						System.out.println(cur+" "+temp.size());
+						// check if the precedence of operator on top of stack is greater or not
+						if(!temp.isEmpty()){
+							while(!temp.isEmpty()&&checkPrecidence(temp.peek(), cur)){
+								// if precedence of top element is greater or equal then we have to push it to the queue 
+								post.add(temp.pop());
+								
+							}
+						}
+						temp.push(cur);
+						
+						}else{
+							post.add(cur);
+						}
+					}
+				while(!temp.isEmpty()){
+					post.add(temp.pop());
+				}
+				
+				return post;
 			}
 		});
 		btnNewButton_23.setFont(new Font("Dialog", Font.PLAIN, 19));
@@ -318,6 +469,6 @@ public class testWindow {
 		frame.setBounds(100, 100, 266, 359);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	
 }
