@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import com.sun.corba.se.spi.orbutil.fsm.Action;
+
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -19,6 +22,9 @@ import java.util.Queue;
 import java.util.Stack;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class testWindow {
 
@@ -89,6 +95,17 @@ public class testWindow {
 				textField.setText(s+"1");
 			}
 		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton.setBackground(Color.WHITE);
 		panel.add(btnNewButton);
 		
@@ -96,6 +113,17 @@ public class testWindow {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+"2");
+			}
+		});
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_1.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_1.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_1.setBackground(Color.WHITE);
@@ -107,6 +135,17 @@ public class testWindow {
 				textField.setText(textField.getText()+"3");
 			}
 		});
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_2.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_2.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_2.setBackground(Color.WHITE);
 		panel.add(btnNewButton_2);
 		
@@ -114,6 +153,17 @@ public class testWindow {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+"4");
+			}
+		});
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_3.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_3.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_3.setBackground(Color.WHITE);
@@ -125,6 +175,17 @@ public class testWindow {
 				textField.setText(textField.getText()+"5");
 			}
 		});
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_4.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_4.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_4.setBackground(Color.WHITE);
 		panel.add(btnNewButton_4);
 		
@@ -132,6 +193,17 @@ public class testWindow {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+"6");
+			}
+		});
+		btnNewButton_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_5.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_5.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_5.setBackground(Color.WHITE);
@@ -143,6 +215,17 @@ public class testWindow {
 				textField.setText(textField.getText()+"7");
 			}
 		});
+		btnNewButton_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_6.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_6.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_6.setBackground(Color.WHITE);
 		panel.add(btnNewButton_6);
 		
@@ -152,13 +235,44 @@ public class testWindow {
 				textField.setText(textField.getText()+"8");
 			}
 		});
+		btnNewButton_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_7.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_7.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_7.setBackground(Color.WHITE);
 		panel.add(btnNewButton_7);
 		
 		JButton btnNewButton_8 = new JButton("9");
+		btnNewButton_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_8.setBackground(new Color(223, 220, 219  ));
+			}
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_8.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+"9");
+			}
+		});
+		btnNewButton_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_7.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_7.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_8.setBackground(Color.WHITE);
@@ -176,6 +290,17 @@ public class testWindow {
 				}
 			}
 		});
+		btnNewButton_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_9.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_9.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_9.setBackground(Color.WHITE);
 		panel.add(btnNewButton_9);
 		
@@ -185,6 +310,17 @@ public class testWindow {
 				textField.setText(textField.getText()+"0");
 			}
 		});
+		btnNewButton_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_10.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_10.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_10.setBackground(Color.WHITE);
 		panel.add(btnNewButton_10);
 		
@@ -192,6 +328,17 @@ public class testWindow {
 		btnNewButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+".");
+			}
+		});
+		btnNewButton_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_11.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_11.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_11.setBackground(Color.WHITE);
@@ -215,6 +362,17 @@ public class testWindow {
 		panel_2.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		JButton btnNewButton_12 = new JButton(String.valueOf(	"\u221A"));
+		btnNewButton_12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton_12.setBackground(new Color(223, 220, 219  ));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_12.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_12.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -243,6 +401,15 @@ public class testWindow {
 		panel_2.add(btnNewButton_14);
 		
 		JButton btnNewButton_15 = new JButton(String.valueOf(	"\u2190"));
+		btnNewButton_15.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_15.setBackground(Color.RED);
+			}
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_15.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_15.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -293,6 +460,38 @@ public class testWindow {
 		});
 		btnNewButton_19.setBackground(Color.WHITE);
 		panel_2.add(btnNewButton_19);
+		btnNewButton_19.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				btnNewButton_19.setBackground(Color.WHITE);
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				btnNewButton_19.setBackground(Color.GRAY);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(188, 161, 62, 165);
@@ -308,11 +507,26 @@ public class testWindow {
 		});
 		btnNewButton_21.setBackground(Color.WHITE);
 		panel_3.add(btnNewButton_21);
-		
+		btnNewButton_21.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent a){
+				btnNewButton_21.setBackground(Color.GRAY);
+			}
+public void mouseExited(MouseEvent a){
+				btnNewButton_21.setBackground(Color.WHITE);
+			}
+		});
 		JButton btnNewButton_22 = new JButton("-");
 		btnNewButton_22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(textField.getText()+"-");
+			}
+		});
+		btnNewButton_22.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent a){
+				btnNewButton_22.setBackground(Color.GRAY);
+			}
+public void mouseExited(MouseEvent a){
+				btnNewButton_22.setBackground(Color.WHITE);
 			}
 		});
 		btnNewButton_22.setFont(new Font("Dialog", Font.PLAIN, 19));
@@ -328,8 +542,23 @@ public class testWindow {
 		btnNewButton_20.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_20.setBackground(Color.WHITE);
 		panel_3.add(btnNewButton_20);
-		
+		btnNewButton_20.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent a){
+				btnNewButton_20.setBackground(Color.GRAY);
+			}
+public void mouseExited(MouseEvent a){
+				btnNewButton_20.setBackground(Color.WHITE);
+			}
+		});
 		JButton btnNewButton_23 = new JButton("=");
+		btnNewButton_23.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent a){
+				btnNewButton_23.setBackground(Color.GREEN);
+			}
+public void mouseExited(MouseEvent a){
+				btnNewButton_23.setBackground(Color.WHITE);
+			}
+		});
 		btnNewButton_23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = textField.getText();
@@ -341,45 +570,11 @@ public class testWindow {
 				textField.setText(String.valueOf(solution));
 			}
 			
-			private double calculateSolution(Queue<String> post) {
-				// TODO Auto-generated method stub
-				Stack<String> temp = new Stack<String>();
-				while(!post.isEmpty()){
-					String c = post.poll();
-					if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
-							c.equals("+") || c.equals("\u00D7")){
-						double a = Double.parseDouble(temp.pop());
-						double b = Double.parseDouble(temp.pop());
-						double sol = 0;
-						System.out.println(c);
-						if(c.equals("+")){
-							// Addition of two happens here
-							sol = a+b;
-						}else if(c.equals("-")){
-							// subtraction of two happens here
-							sol = b-a;
-						}else if(c.equals(	"\u00F7")){
-							//division of the two happens here
-							sol = b/a;
-						}else if(c.equals("/u00D7")){
-							//multiplication of two happens here
-							sol = b*a;	
-						}else {
-							JOptionPane.showMessageDialog(null, "The making of operation is under processing");
-						}
-						temp.push(String.valueOf(sol));
-					}else {
-						temp.push(c);
-						
-					}
-				 }
-				
-				
-				return Double.parseDouble(temp.peek());
-			}
+			
 
 			private Queue<String> parseText(String text){
 				int len = text.length();
+				boolean reach = false;
 				Queue <String> sol = new LinkedList<String>();
 				String temp = "";
 				for(int i=0;i<len;i++){
@@ -387,21 +582,29 @@ public class testWindow {
 					if(c.equals("(")){
 						sol.add(String.valueOf(c));
 						temp = "";
+						reach = true;
 					}else if(c.equals(")")){
 						if(temp.length()>0)
 							sol.add(temp);
 						temp = "";
 						sol.add(")");
+						reach = false;
 					}else if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
 							c.equals("+") || c.equals("\u00D7")){
 						if(temp.length()>0){
 							sol.add(temp);
 						}
-						temp = "";
-						sol.add(c);	
-						
+						 
+						if(!reach&&temp.length()>0){
+						sol.add(c);
+						temp = "";}
+						else{
+							temp = c;
+						}
+						reach = true;
 					}else{
 						temp = temp+c;
+						reach = false;
 					}
 					
 				}if(temp.length()>0)
@@ -456,13 +659,56 @@ public class testWindow {
 							post.add(cur);
 						}
 					}
-				while(!temp.isEmpty()){
+				while(!temp.isEmpty()&&!(temp.peek().equals("(")||temp.peek().equals(")"))){
+					System.out.println("Entered");
 					post.add(temp.pop());
 				}
 				
 				return post;
 			}
+			private double calculateSolution(Queue<String> post) {
+				// TODO Auto-generated method stub
+				Stack<String> temp = new Stack<String>();
+				while(!post.isEmpty()){
+					String c = post.poll();
+					if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
+							c.equals("+") || c.equals("\u00D7")){
+						double a = Double.parseDouble(temp.pop());
+						double b = Double.parseDouble(temp.pop());
+						System.out.println(a+" "+b);
+						double sol = 0;
+						System.out.println(c);
+						if(c.equals("+")){
+							// Addition of two happens here
+							sol = a+b;
+						}else if(c.equals("-")){
+							// subtraction of two happens here
+							sol = b-a;
+						}else if(c.equals(	"\u00F7")){
+							//division of the two happens here
+							sol = b/a;
+						}else if(c.equals("\u00D7")){
+							//multiplication of two happens here
+							sol = b*a;	
+						}else {
+							System.out.println(c);
+						}
+						temp.push(String.valueOf(sol));
+					}else {
+						temp.push(c);
+						
+					}
+				 }
+				
+				
+				if(temp.isEmpty()){
+					return 0;
+				}else{
+					return Double.parseDouble(temp.peek());
+				}
+			}
 		});
+		
 		btnNewButton_23.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_23.setBackground(Color.WHITE);
 		panel_3.add(btnNewButton_23);
