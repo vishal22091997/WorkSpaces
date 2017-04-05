@@ -16,8 +16,10 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 import java.awt.event.ActionEvent;
@@ -26,13 +28,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class testWindow {
+public class testWindow extends JFrame{
 
 	private JFrame frame;
 	private JTextField textField;
 	private int token = 1;
 	private boolean actSig = true;
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
+	private static List<String> history = new ArrayList<String>();
 	/**
 	 * Launch the application.
 	 */
@@ -80,8 +83,8 @@ public class testWindow {
 		frame.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		
-		
+	
+		int cbra = 0;
 		
 		
 		
@@ -124,6 +127,7 @@ public class testWindow {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btnNewButton_1.setBackground(Color.WHITE);
+				
 			}
 		});
 		btnNewButton_1.setBackground(Color.WHITE);
@@ -425,6 +429,8 @@ public class testWindow {
 		JButton btnNewButton_16 = new JButton("\u21B6");
 		btnNewButton_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				History hist = new History(history);
+				hist.setVisible(true);
 			}
 		});
 		btnNewButton_16.setFont(new Font("Dialog", Font.PLAIN, 19));
@@ -568,55 +574,102 @@ public void mouseExited(MouseEvent a){
 				System.out.println(post);
 				double solution = calculateSolution(post);
 				textField.setText(String.valueOf(solution));
+				String finalSol = text+" = "+solution;
+				history.add(finalSol);
 			}
 			
+		//	map.put("\u00F7",2);//division "\u00F7"
+		//	map.put("\u00D7", 2);//multiplication "\u00D7"
+			private void errorMessage(String text){
+				JOptionPane.showMessageDialog(null, text);
+			}
 			
-
 			private Queue<String> parseText(String text){
-				int len = text.length();
-				boolean reach = false;
-				Queue <String> sol = new LinkedList<String>();
+				Queue<String> sol = new LinkedList<String>();
+				int last = -1;
+				String c = String.valueOf(text.charAt(0));
 				String temp = "";
-				for(int i=0;i<len;i++){
-					String c = String.valueOf(text.charAt(i));
-					if(c.equals("(")){
-						sol.add(String.valueOf(c));
-						temp = "";
-						reach = true;
-					}else if(c.equals(")")){
-						if(temp.length()>0)
-							sol.add(temp);
-						temp = "";
-						sol.add(")");
-						reach = false;
-					}else if(c.equals("\u00D7") || c.equals("\u00F7") || c.equals("-") || 
-							c.equals("+") || c.equals("\u00D7")){
-						if(temp.length()>0){
-							sol.add(temp);
-						}
-						 
-						if(!reach&&temp.length()>0){
+				if(c.equals(")")||c.equals("\u00F7")||c.equals("\u00D7")){
+					errorMessage("Syntax Error");
+				}else{
+					if(c.equals("+")||c.equals("-")){
+						last = 3;
+						temp = c;			
+					}else if(c.equals("(")){
+						last =	 1;
 						sol.add(c);
-						temp = "";}
-						else{
-							temp = c;
-						}
-						reach = true;
 					}else{
-						temp = temp+c;
-						reach = false;
+						temp = c;
+						last = 2;
+					}
+				}
+				int len = text.length();
+				for(int i=1;i<len;i++){
+					String s = String.valueOf(text.charAt(i));
+					if(s.equals("(")){
+							if(last == 2||last==5){
+								sol.add("\u00D7");	
+							}
+							sol.add(s);
+							last = 1;
+					}else if(s.equals("+")||s.equals("-")){
+						if(last==1){
+							temp="";
+							temp+=s;
+						}else if(last==2){
+							sol.add(temp);
+							temp = "";
+							sol.add(s);
+						}else if(last == 3||last==4){
+							temp = "";
+							temp += s;
+						}else if(last==5){
+							sol.add(s);
+						}
+						last=3;
+					}else if(s.equals("\u00F7")||s.equals("\u00D7")){
+						if(last==1||last==3||last==4){
+							errorMessage("Syntax Error");
+						}else if(last==2||last==5){
+							sol.add(temp);
+							temp = "";
+							sol.add(s);
+							
+						}
+						last=4;
+					}else if(s.equals(")")) {
+						if(last==1||last==3||last==4){
+							errorMessage("Syntax Error");
+						}else if(last==2||last==5){
+							sol.add(temp);
+							sol.add(s);
+							temp = "";
+						}
+						last=5;
+					}else{
+						if(last==1||last==2||last==3||last==4){
+							temp += s;
+						}else if(last==5){
+							sol.add("\u00D7");
+							temp+=s;
+						}
+						last=2;
 					}
 					
-				}if(temp.length()>0)
-				sol.add(temp);
-				
-				
+					
+					
+					
+				}
+				if(temp.length()>0)
+					sol.add(temp);
 				return sol;
+			}
+			private void ats(String text){
 				
 			}
-
 			private boolean checkPrecidence(String temp, String cur){
 				// TODO Auto-generated method stub
+				
 				if(map.get(temp)>=map.get(cur)){
 					return true;
 				}
@@ -630,7 +683,6 @@ public void mouseExited(MouseEvent a){
 			}
 
 			private Queue<String> convertToPost(Queue<String> queue) {
-				// TODO Auto-generated method stub
 				Queue<String> post = new LinkedList<String>();
 				Stack<String> temp = new Stack<String>();
 				while(!queue.isEmpty()){
