@@ -11,6 +11,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import com.sun.corba.se.spi.orbutil.fsm.Action;
+import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 
 import java.awt.GridLayout;
 import javax.swing.JPanel;
@@ -27,16 +28,20 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JScrollBar;
+import java.awt.Window.Type;
 
 public class testWindow extends JFrame{
 
-	private JFrame frame;
+	private JFrame frmCalvish;
 	private JTextField textField;
 	private int token = 1;
 	private boolean actSig = true;
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
 	private static List<String> history = new ArrayList<String>();
+	private int cbra = 0;
 	/**
+	 * 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -55,7 +60,7 @@ public class testWindow extends JFrame{
 					
 					
 					///till here
-					window.frame.setVisible(true);
+					window.frmCalvish.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,17 +79,19 @@ public class testWindow extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.WHITE);
-		frame.getContentPane().setLayout(null);
+		frmCalvish = new JFrame();
+		frmCalvish.setTitle("Calculator");
+		frmCalvish.setResizable(false);
+		frmCalvish.getContentPane().setBackground(Color.WHITE);
+		frmCalvish.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 160, 191, 166);
-		frame.getContentPane().add(panel);
+		panel.setBounds(0, 160, 187, 166);
+		frmCalvish.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		
 	
-		int cbra = 0;
+		
 		
 		
 		
@@ -350,7 +357,7 @@ public class testWindow extends JFrame{
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 250, 76);
-		frame.getContentPane().add(panel_1);
+		frmCalvish.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		textField = new JTextField();
@@ -362,47 +369,30 @@ public class testWindow extends JFrame{
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(0, 75, 250, 86);
-		frame.getContentPane().add(panel_2);
+		frmCalvish.getContentPane().add(panel_2);
 		panel_2.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		JButton btnNewButton_12 = new JButton(String.valueOf(	"\u221A"));
-		btnNewButton_12.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				btnNewButton_12.setBackground(new Color(223, 220, 219  ));
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnNewButton_12.setBackground(Color.WHITE);
-			}
-		});
-		btnNewButton_12.setFont(new Font("Dialog", Font.PLAIN, 19));
-		btnNewButton_12.addActionListener(new ActionListener() {
+		JButton btnNewButton_16 = new JButton("\u21B6");
+		btnNewButton_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText()+String.valueOf("\u221A")+"(");
+				History hist = new History(history);
+				hist.setVisible(true);
 			}
 		});
-		btnNewButton_12.setBackground(Color.WHITE);
-		panel_2.add(btnNewButton_12);
-		
-		JButton btnNewButton_13 = new JButton('x'+String.valueOf("\u00B2"));
-		btnNewButton_13.setFont(new Font("Dialog", Font.PLAIN, 19));
-		btnNewButton_13.addActionListener(new ActionListener() {
+		btnNewButton_16.setFont(new Font("Dialog", Font.PLAIN, 19));
+		btnNewButton_16.setBackground(Color.WHITE);
+		panel_2.add(btnNewButton_16);
+		JButton btnNewButton_17 = new JButton("(");
+		JButton btnNewButton_18 = new JButton(")");
+		btnNewButton_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cbra++;
+				if(cbra>0){
+					btnNewButton_18.setEnabled(true);
+					textField.setText(textField.getText()+"(");
+				}
 			}
 		});
-		btnNewButton_13.setBackground(Color.WHITE);
-		panel_2.add(btnNewButton_13);
-		
-		JButton btnNewButton_14 = new JButton('x'+String.valueOf("\u00B3"));
-		btnNewButton_14.setFont(new Font("Dialog", Font.PLAIN, 19));
-		btnNewButton_14.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_14.setBackground(Color.WHITE);
-		panel_2.add(btnNewButton_14);
 		
 		JButton btnNewButton_15 = new JButton(String.valueOf(	"\u2190"));
 		btnNewButton_15.addMouseListener(new MouseAdapter() {
@@ -423,33 +413,29 @@ public class testWindow extends JFrame{
 				}
 			}
 		});
+		
+		JButton btnCe = new JButton("CE");
+		btnCe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField.setText("");
+			}
+		});
+		btnCe.setBackground(Color.WHITE);
+		panel_2.add(btnCe);
 		btnNewButton_15.setBackground(Color.WHITE);
 		panel_2.add(btnNewButton_15);
-		
-		JButton btnNewButton_16 = new JButton("\u21B6");
-		btnNewButton_16.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				History hist = new History(history);
-				hist.setVisible(true);
-			}
-		});
-		btnNewButton_16.setFont(new Font("Dialog", Font.PLAIN, 19));
-		btnNewButton_16.setBackground(Color.WHITE);
-		panel_2.add(btnNewButton_16);
-		
-		JButton btnNewButton_17 = new JButton("(");
-		btnNewButton_17.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText()+"(");
-			}
-		});
 		btnNewButton_17.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_17.setBackground(Color.WHITE);
 		panel_2.add(btnNewButton_17);
 		
-		JButton btnNewButton_18 = new JButton(")");
+		
+		btnNewButton_18.setEnabled(false);
 		btnNewButton_18.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { 
+				cbra--;
+				if(cbra==0){
+					btnNewButton_18.setEnabled(false);
+				}
 				textField.setText(textField.getText()+")");
 			}
 		});
@@ -500,8 +486,8 @@ public class testWindow extends JFrame{
 		});
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(188, 161, 62, 165);
-		frame.getContentPane().add(panel_3);
+		panel_3.setBounds(186, 161, 64, 165);
+		frmCalvish.getContentPane().add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnNewButton_21 = new JButton("+");
@@ -764,9 +750,7 @@ public void mouseExited(MouseEvent a){
 		btnNewButton_23.setFont(new Font("Dialog", Font.PLAIN, 19));
 		btnNewButton_23.setBackground(Color.WHITE);
 		panel_3.add(btnNewButton_23);
-		frame.setBounds(100, 100, 266, 359);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCalvish.setBounds(100, 100, 253, 354);
+		frmCalvish.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
-	
 }
