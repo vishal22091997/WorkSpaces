@@ -593,10 +593,17 @@ public void mouseExited(MouseEvent a){
 				for(int i=1;i<len;i++){
 					String s = String.valueOf(text.charAt(i));
 					if(s.equals("(")){
-							if(last == 2||last==5){
-								sol.add("\u00D7");	
+							if(last==2){
+								sol.add(temp);
+								temp = "";
+								sol.add("\u00D7");
+								sol.add(s);
+							}else if(last==1||last==3||last==4){
+								sol.add(s);
+							}else{
+								sol.add("\u00D7");
+								sol.add(s);
 							}
-							sol.add(s);
 							last = 1;
 					}else if(s.equals("+")||s.equals("-")){
 						if(last==1){
